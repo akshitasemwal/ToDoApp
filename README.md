@@ -40,3 +40,7 @@ This is a simple web-based Todo application built with Node.js, Express, MongoDB
    <b>Task Report</b><br>
     You can view the report of all tasks by clicking the "Report" button. <br>
     The report will display the count of pending, canceled, deleted, and completed tasks.
+    
+   <b>Authentication</b><br> 
+   Registering users' password is saved after encryption. <br>
+   Authentication of the logging in users to provide access to the todo list. It is done using jwt tokens.
