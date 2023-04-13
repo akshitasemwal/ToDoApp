@@ -100,6 +100,10 @@ app.get("/signup", function(req, res){
   res.render("signup");
 });
 
+app.get("/", function(req, res){
+  res.redirect("/tasks");
+})
+
 // home page route
 app.get("/tasks", function (req, res) {
   Task.find({})
