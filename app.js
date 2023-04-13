@@ -101,7 +101,7 @@ app.get("/signup", function(req, res){
 });
 
 app.get("/", function(req, res){
-  res.redirect("/tasks");
+  res.redirect("/login");
 })
 
 // home page route
