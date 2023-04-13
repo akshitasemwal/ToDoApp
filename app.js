@@ -64,10 +64,12 @@ app.post('/login', function(req, res) {
   User.findOne({ email }).then(user => {
     if (!user) {
       res.status(400).send( 'Invalid email or password');
+      res.redirect("/login");
     }
     bcrypt.compare(password, user.password).then(isMatch => {
       if (!isMatch) {
         res.status(400).send( 'Invalid email or password');
+        res.redirect("/login");
       }
       const payload = {
         id: user.id,
