@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <form action="/tasks" method="POST">
+        <input type="text" name="task" placeholder="Add a new task" required>
+        <input type="number" name="priority" placeholder="Priority (1-9)" required>
+        <button class="bt" type="submit">+</button>
+      </form>
+      <hr>
+
+      <h2>Task List</h2>
+      <% if(tasks && tasks.length > 0) { %>
+        <ol>
+          <% tasks.forEach((task, index) => { %>
+
+            <li value="<%= task.priority %>">
+              <%=  task.task + ' (' + (index+1) + ') ' %>
+              <a href="/delete/<%=task._id%>" style="color: red;" >Del</a>
+
+              <% if (task.status === "completed") {  %>
+                <span class="completed">[&#x2713;]</span>
+              <% } else if (task.status === "canceled") { %>
+                <span class="canceled">[&#x2717;]</span>
+              <% } else { %>
+                <br>
+                <form class="" action="/tasks/<%= task._id %>/status" method="POST">
+                  <label for="status">Status:</label>
+                  <select name="status" id="status" class="form-control">
+                    <option value="pending" <% if (task.status === 'pending') { %>selected<% } %> checked> Pending </option>
+                    <option value="completed" <% if (task.status === 'completed') { %>selected<% } %>> Completed </option>
+                    <option value="canceled" <% if (task.status === 'canceled') { %>selected<% } %>> Canceled </option>
+                  </select>
+                  <button type="submit" class="btn btn-primary">Update Status</button>
+                </form>
+
+              <% } %>
+
+            </li>
+          <% }) %>
+        </ol>
+
+      <% } else { %>
+        <p>No tasks yet :(</p>
+      <% } %>
+      <hr>
+
+      <h2>Report</h2>
+      <ul>
+        <li>Pending tasks: <%= pending %></li>
+        <li>Completed tasks: <%= completed %></li>
+        <li>Canceled tasks: <%= canceled %></li>
+        <li>Deleted tasks: <%= deleted %></li>
+      </ul>
+    </div>
+  </body>
+
+</html>
