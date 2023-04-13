@@ -15,7 +15,7 @@
       <h1>To-Do List</h1>
       <form action="/tasks" method="POST">
         <input type="text" name="task" placeholder="Add a new task" required>
-        <input type="number" name="priority" placeholder="Priority (1-9)" required>
+        <input type="number" name="priority" placeholder="Priority (1-9)" min="1" max="9" required>
         <button class="bt" type="submit">+</button>
       </form>
       <hr>
